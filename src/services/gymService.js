@@ -1,17 +1,16 @@
+//importamos el cliente http creado 
 import http from "./http-common";
 
-
+//inicio funciones que retornan peticiones http
 const obtenerUsuaros = ()=>{
     return http.get("/users");
 }
 
 const verificarUsuario=(data)=>{
-    console.log(data);
     return http.post("/auth/login",data);
 }
 
 const crearUsuario=(data)=>{
-    console.log(data);
     return http.post("/auth/register",data);
 }
 
@@ -21,16 +20,18 @@ const infoIngresado=(data)=>{
 }
 
 const infoEntrenador=(data)=>{
-    console.log(data);
     return http.get("/users/"+data);
 }
 const updateEntrenador=(id,data)=>{
-    console.log(data);
     return http.put("/users/"+id,data);
 }
 const deleteEntrenador=(id)=>{
     return http.delete("/users/"+id);
 }
+
+//fin funciones 
+
+//creamos un 'objeto' con todas las funciones creadas
 const GymService ={
     obtenerUsuaros,
     verificarUsuario,
@@ -41,4 +42,5 @@ const GymService ={
     deleteEntrenador
 }
 
+//exportación del 'objeto' con todas las funciones
 export default GymService;

@@ -1,7 +1,10 @@
+//importación de la clase Component e importación de React
 import React,{Component} from "react";
 
+//creación del componente Virtual
 class Virtual extends Component{
     render(){
+      //renderización del componente
         return(
             <div class="container-fluid">
                   <div class="row">
@@ -75,4 +78,5 @@ class Virtual extends Component{
     }
 }
 
+//exportación del componente
 export default Virtual;

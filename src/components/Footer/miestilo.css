@@ -1,3 +1,4 @@
+/*estilos para el footer*/
 .main-footer{
     color: white;
     background-color:#212529;
@@ -5,5 +6,4 @@
     position: relative;
     bottom: 0%;
     width: 100%;
-
 }

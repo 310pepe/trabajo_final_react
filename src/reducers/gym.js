@@ -1,3 +1,4 @@
+//importación de los tipos de acciones
 import { 
     CREAR_USUARIO,
     INFO_ENTRENADOR,
@@ -6,12 +7,16 @@ import {
     VERIFICAR_USUARIO
 } from "../actions/types";
 
+//creación del estado inicial del reducer
 const initialState = [];
 
+//creación del reducer
 function gymReducer(gyms = initialState, action)
 {
+    //creación de las variable type y payload de la variable action
     const { type, payload } = action;
 
+    //validacion del type y acciones para cada una
     switch (type){
         case OBTENER_USUARIOS:
             return  [...gyms, payload];
@@ -30,4 +35,5 @@ function gymReducer(gyms = initialState, action)
     }
 }
 
+//exportación del reducer
 export default gymReducer;

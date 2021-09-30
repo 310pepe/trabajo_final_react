@@ -1,5 +1,7 @@
+//importación de la clase Component e importación de React
 import React,{Component} from "react";
 
+//creación del componente Experiencia
 class Experiencia extends Component{
     render(){
         return(
@@ -52,4 +54,5 @@ class Experiencia extends Component{
     }
 }
 
+//Exportación del componente
 export default Experiencia;

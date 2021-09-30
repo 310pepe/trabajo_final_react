@@ -1,9 +1,14 @@
+//importaciones necesarias de react
 import React,{ useEffect} from "react";
+//importaciones necesarias de redux
 import { useDispatch,useSelector} from "react-redux";
 
+//importaciones necesarias para realizar un router
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { infoUsuario,obtenerUsuaros } from "../../actions/gym";
+//importacion de la acción infoUsuario
+import { infoUsuario} from "../../actions/gym";
 
+//importacion de componentes a mostrar
 import Login from "../Login-Register/login";
 import Register from "../Login-Register/register";
 import AddTutorial from "../Login-Register/prueba";
@@ -14,18 +19,24 @@ import Gimnasio from "../home/gimnasio";
 import Virtual from "../home/virtual";
 import Entrenadores from "../logueado/entrenadores";
 import Clases from "../logueado/clases";
-import Editar from "../logueado/edit";
 
+//creación del componente
 const Navbar =()=>{
+  //obtener le navbar
   const token = localStorage.getItem('token');
-  const tutorials = useSelector(state => state);
-  console.log(tutorials);
-  const dispatch = useDispatch();
-  console.log(token);
 
+  //establecer el valor de la variable al estado del store
+  const tutorials = useSelector(state => state);
+
+  //instanciasión de dispatch
+  const dispatch = useDispatch();
+
+  //ejecutar función cada vez que se renderice el componente
   useEffect(() => {
+    //validar si el token existe
     if (token)
     {
+    //ejecutar accion infoUsuario
     dispatch(infoUsuario({token}))
     
     }else{
@@ -33,17 +44,23 @@ const Navbar =()=>{
     }
   }, []);
 
+  //funcion para cerrar sesión
   const cerrar=()=>{
+    //borrar el token del localstorage
     localStorage.removeItem('token');
+    //redireccionar al home
     window.location='/'
   }
   
   
-     
+     //renderización del componente
         return(
             <Router>
+              {/*inicio del router */}
+              {/*inicio del navbar */}
               <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
+                  {/*inicio de links de navegación */}
                   <Link to={"/home"} class="navbar-brand">
                     GYM STYLE'S
                   </Link>            
@@ -72,6 +89,7 @@ const Navbar =()=>{
                           Virtual
                         </Link>
                       </li>
+                      {/*validación del token para mostar el link */}
                       {token?(<li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Clases
@@ -99,7 +117,9 @@ const Navbar =()=>{
             </li>
           </ul>
         </li>):(<span></span>)}
-                      {tutorials.gymReducer.Rol=='usuario'?( <li class="nav-item">
+        {/*fin validacion */}
+        {/*validación del rol */}
+                      {tutorials.gymReducer.Rol=='administrador'?( <li class="nav-item">
                         <Link to={"/entrenadores"} class="nav-link">
                           Entrenadores
                         </Link>
@@ -126,13 +146,17 @@ const Navbar =()=>{
                       </Link>
                     </form>
                     )}
+                    {/*fin validacion */}
                     
                   </div>
+                  {/*fin links de navegación */}
                 </div>
               </nav>
-
-      <div class=" mt-3 container">
+              {/*fin del navbar */}
+      {/*inicio de las clases a renderizar */}
+      <div class=" mt-3 container">        
         <Switch>
+          {/*rutas permitidas y componente a renderizar según la ruta */}
           <Route exact path="/contactos" component={Contactos} />
           <Route path="/experiencia" component={Experiencia} />
           <Route path="/gimnasio" component={Gimnasio} />
@@ -145,6 +169,8 @@ const Navbar =()=>{
           <Route exact path={["/", "/home","**"]} component={Home} />
         </Switch>
       </div>
+      {/*fin de las clases a renderizar */}
+      {/*fin del router */}
     </Router>
         )
     

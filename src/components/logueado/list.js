@@ -1,17 +1,21 @@
+//importaciones necesarias de react
 import React from "react";
 
+//creación del componente
 const ClaseD = (props)=>{
+    //establecer a la variable el valor de dia(valor enviado por componente padre)
     const dia= props.day;
+    //establecer a la variable el valor de clases(valor enviado por componente padre)
     const clases= props.clases;
 
-    console.log(dia);
-    console.log(clases);
+    //funcion para renderizar las clases
     const Prueba=()=>{
-
+        //establecer a hola las clases renderizadas
         let hola =clases.map(clase=>{
+            //validar si la clase existe y si el dia es el correspondiente
             if(clase && clase.day===dia)
             {
-               console.log('hola');
+                //retorno de la clase renderizada
                return (
                 <div class="card flex-row flex-wrap">
                     <div class="card-header border-0">
@@ -32,12 +36,14 @@ const ClaseD = (props)=>{
                )
             }
         });
-        console.log(hola);
+        //retorno de las clases renderizadas
         return (<div>{hola}</div>);
     }
+    //renderización del componente
     return(
         <Prueba/>
     )
 }
 
+//exportación de la clase
 export default ClaseD;

@@ -1,8 +1,13 @@
+//importaciones necesarias de react
 import React from "react";
+
+//importaciones necesarias para crear un router
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
+//importacion de componente necesario
 import ClaseD from "./list";
 const Clases = (props)=>{
+    //creación de variable con la información de las clases
     const allClases=[{
         title:"Clase de boxeo presencial lunes",
         day:"lunes",
@@ -364,7 +369,10 @@ const Clases = (props)=>{
         img:"../../img/entre.jpg"
     }
     ];
+    //creacion de constante con la info enviada desde el router principal
     const clase= props.clase;
+
+    //validación que la clase corresponda a la rama deseada yoga,box,etc
     const clases = allClases.map(cl=>{
         if(cl.tipo===clase){
             return cl;
@@ -373,15 +381,19 @@ const Clases = (props)=>{
 
 
     
-
+    //renderización del componente
     return(
+        
         <Router>
+            {/*inicio del router */}
+            {/*inicio del menu */}
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">           
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" >
                     <span class="navbar-toggler-icon"></span>
                   </button>
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      {/*inicio de los links para navegar */}
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                       <li class="nav-item">
                         <Link to={"/clases/"+clase+"/lunes"} class="nav-link">
@@ -418,13 +430,16 @@ const Clases = (props)=>{
                           Domingo
                         </Link>
                       </li>
+                      {/*fin de los links para navegar */}
                     </ul>
                   </div>
                 </div>
               </nav>
+              {/*fin del menú */}
+              {/*inicio de las clases a renderizar */}
             <div class=" mt-3 container">
             <Switch>
-                
+                {/*rutas permitidas y componente a renderizar según la ruta */}
                 <Route path={"/clases/"+clase+"/martes"} render={() => <ClaseD clases={clases} day='martes' />} />
                 <Route path={"/clases/"+clase+"/miercoles"} render={() => <ClaseD clases={clases} day='miercoles' />} />
                 <Route path={"/clases/"+clase+"/jueves"} render={() => <ClaseD clases={clases} day='jueves' />} />
@@ -436,6 +451,8 @@ const Clases = (props)=>{
                 
             </Switch>
             </div>
+            {/*fin de las clases a renderizar */}
+            {/*fin del router */}
         </Router>
     )
 }

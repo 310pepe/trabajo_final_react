@@ -1,3 +1,4 @@
+//Creamos constantes para saber el tipo de accion ejecutada
 export const OBTENER_USUARIOS = "OBTENER_USUARIOS";
 export const VERIFICAR_USUARIO = "VERIFICAR_USUARIO";
 export const CREAR_USUARIO = "CREAR_USUARIO";

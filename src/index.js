@@ -4,10 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+//importaciones necesarias para utilizar el store en la app
 import { Provider } from 'react-redux';
 import store from './store';
 
 ReactDOM.render(
+  //Utilización del store en la app
   <Provider store={store}>
     <React.StrictMode>
       <App />

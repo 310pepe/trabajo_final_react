@@ -1,5 +1,7 @@
+//importación de la clase Component e importación de React
 import React,{Component} from "react";
 
+//creación del componente Contactos
 class Contactos extends Component{
     render(){
         return(
@@ -106,4 +108,5 @@ class Contactos extends Component{
     }
 }
 
+//Exportación del componente
 export default Contactos;

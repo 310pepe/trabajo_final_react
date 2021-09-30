@@ -1,5 +1,10 @@
+//importación de la clase Component
 import React,{ Component } from "react";
+
+//importación de estilos
 import "./miestilo.css";
+
+//creacion del componente footer
 class Footer extends Component{
 
     render(){
@@ -54,4 +59,5 @@ class Footer extends Component{
     }
 }
 
+//exportación del componente
 export default Footer;

@@ -1,15 +1,17 @@
+//importaciones necesarias de react
 import React,{useState,useEffect} from "react";
 
+//importacion de las acciones necesarias
 import {obtenerUsuaros,infoEntre,updateEntre,crearUsuario,deleteEntre} from "../../actions/gym";
+
+//importaciones necesarias de redux
 import { useDispatch} from "react-redux";
-
   
   
-  
-  
-
+//creación del componente 
 const Entrenadores =()=>{
 
+  //interface para actualizar entrenador
   const datosPer = {
     'email':"",
     'NameUser':"",
@@ -17,6 +19,7 @@ const Entrenadores =()=>{
     'Telefono':"",
     'Eps':'',
   };
+  //interface para crear entrenador
   const datosPerCr = {
     'email':"",
     'NameUser':"",
@@ -26,73 +29,102 @@ const Entrenadores =()=>{
     'Rol':'entrenador',
     'password':'123456789'
   };
+
+  //creacion de variable para obtener la información del formulario
+  //de actualizar entrenador
   const [pers, setPerso] = useState(datosPer);
+
+  //creacion de variable para obtener la información del formulario 
+  //de crear entrenador
   const [persCr, setPersoCr] = useState(datosPerCr);
 
+  //funcion para capturar los valores del formulario de
+  //actualizar
   const handleInputChange = event => {
     const { name, value } = event.target;
     setPerso({ ...pers, [name]: value });
   };
+
+  //funcion para capturar los valores del formulario de
+  //crear
   const handleInputChange1 = event => {
     const { name, value } = event.target;
     setPersoCr({ ...persCr, [name]: value });
   };
+  //definir interface para la variable clases
   let clase=[];
+  //definir variable para guardar todos los entrenadores
   const [clases, setClases] = useState(clase);
+  //instanciar dispatch
   const dispatch = useDispatch();
+  //función para traer la información de un entrenador
   const traerInfo=(id)=>
   {
+    //ejecutar acción infoEntre
     dispatch(infoEntre(id)).then(response=>{
+      //extraer la información necesaria
       const {name,NameUser,email,Telefono,Eps,id}=response;
       if(NameUser){
+        //establecer la información a la variable de actualización
         setPerso({name,NameUser,email,Telefono,Eps,'index':id});
       }else{
+        //establecer la información a la variable de actualización
         setPerso({name,email,Telefono,Eps});
       }
       
       
     });
   }
-  console.log(pers);
 
+  //función para actualizar un entrenador
   const guardar=(id)=>{
+    //ejecutar acción updateEntre
     dispatch(updateEntre(id,pers)).then(response=>{
-      console.log(response);
+      //recargar la pantalla
       window.location.reload();
     });
   }
   
+  //función para crear un nuevo entrenador
   const crear=()=>{
-    console.log(persCr);
+    //ejecutar acción crearUsuario
     dispatch(crearUsuario(persCr)).then(response=>{
-      console.log(response);
+      //recargar la pantalla
       window.location.reload();
     })
   }
 
+  //función para borrar un entrenador
   const borrar=(id)=>{
-    console.log(id);
+    //ejecutar acción deleteEntre
     dispatch(deleteEntre(id)).then(response=>{
-      console.log(response);
+      //recargar la pantalla
       window.location.reload();
     }).catch(e => {
+      //recargar la pantalla
       window.location.reload();
     });
   }
 
+  //ejecutar funcion cada vez que se renderice el componente
   useEffect(() => {
+    //ejecutar acción obtenerUsuarios y establecer los valores a la variable clases
     dispatch(obtenerUsuaros()).then(response=>setClases(response));
   }, []);
-
+    
+    //funcion para mostrar los entrenadores
     const MostrarEntr=(props)=>{ 
+    //crear una variable con todos los usuarios
     let us = props.users;
-    console.log(us);
+    //validar si existe la variable
     if(us && us.length>0)
     {
+      //Crear variable con los entrenadores renderizados
       let entrenadores= us.map(usuario=>{
-        console.log(usuario);
+        //validar el rol del usuario
       if(usuario.Rol=="entrenador")
       {
+        //retorno de la renderizacion
         return( 
                   <tr>
                     <th scope="row"> {usuario.name} </th>
@@ -108,27 +140,30 @@ const Entrenadores =()=>{
         )
       }
     });
-    
+    //retorno de la variable para ser renderizada
     return (<tbody>{entrenadores}</tbody>);
     }else{
+      //retorno si no existe la variable
       return (<span></span>)
     }
   }
-
-    return( 
-        <div class="row">
-        
+    //renderización del componente
+    return(
+      <div class="row">    
         
         
       <div class="col-12 mt-3"> 
+      {/*inico boton para crear */}
         <div class="d-grid gap-2 mb-2">
             <button class="btn btn-primary " 
             type="button"
             data-bs-toggle="modal" 
             data-bs-target="#crear" >Crear</button>
         </div>
+        {/*fin boton crear */}
+        {/*inicio de la tabla */}
         <table class="table">
-            
+              {/*inicio del tablehead */}
                <thead class="table-dark ">    
                   <tr>
                     <th scope="col">nombre</th>
@@ -140,11 +175,15 @@ const Entrenadores =()=>{
                     <th colspan="2"></th>
                 </tr>
                 </thead>
+                {/*fin del table head */}
+                {/*renderización de entrenadores */}
                 <MostrarEntr users={clases}/>
+
               </table>
+              {/*fin de la tabla */}
 
         </div>
-
+        {/*inicio modal editar */}
         <div class="modal" tabindex="-1" id="editar" >
   <div class="modal-dialog">
     <div class="modal-content">
@@ -219,7 +258,8 @@ const Entrenadores =()=>{
     </div>
   </div>
   </div>
-        
+  {/*fin modal editar */}
+  {/*inicio modal crear */}
   <div class="modal" tabindex="-1" id="crear" >
   <div class="modal-dialog">
     <div class="modal-content">
@@ -293,10 +333,12 @@ const Entrenadores =()=>{
       </div>
     </div>
   </div>
+
   </div>
-        
+      {/*fin modal crear */}
     </div>
     )
 }
 
+//exportación del componente
 export default Entrenadores;

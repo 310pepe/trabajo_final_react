@@ -1,5 +1,7 @@
+//importación de la clase Component e importación de React
 import React,{Component} from "react";
 
+//creación del componente Experiencia
 class Gimnasio extends Component{
     render(){
         return(
@@ -38,4 +40,5 @@ class Gimnasio extends Component{
     }
 }
 
+//exportación del componente
 export default Gimnasio;
