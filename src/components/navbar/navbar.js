@@ -11,7 +11,6 @@ import { infoUsuario} from "../../actions/gym";
 //importacion de componentes a mostrar
 import Login from "../Login-Register/login";
 import Register from "../Login-Register/register";
-import AddTutorial from "../Login-Register/prueba";
 import Contactos from "../home/contactos";
 import Home from "../home/home";
 import Experiencia from "../home/experiencia";
@@ -162,7 +161,6 @@ const Navbar =()=>{
           <Route path="/gimnasio" component={Gimnasio} />
           <Route path="/virtual" component={Virtual} />
           <Route path="/login" component={Login} />
-          <Route path="/prueba" component={AddTutorial} />
           <Route path="/register" component={Register} />
           <Route path="/entrenadores" component={Entrenadores} />
           <Route path="/clases/:clase" render={({match }) => <Clases clase={match.params.clase} />}/>
